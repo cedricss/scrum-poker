@@ -54,9 +54,13 @@
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="/socket.io/socket.io.js"></script>
         <script src="scripts/app.js"></script>
+        <script src="scripts/services/socket.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/navbar.js"></script>
+        <script src="scripts/controllers/room.js"></script>
+        <script src="scripts/directives/uservote.js"></script>
         <!-- endbuild -->
 </body>
 </html>

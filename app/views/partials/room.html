@@ -1,0 +1,6 @@
+<div class="header" ng-controller="RoomCtrl">
+	<ul ng-repeat="vote in votes">
+		<li>{{vote.id}}</li>
+	</ul>
+	<button id="submitVote" ng-click="submitVote()" class="btn btn-info pull-right">Submit Vote</button>
+</div>
