@@ -23,14 +23,21 @@ require('./lib/config/express')(app);
 require('./lib/routes')(app);
 
 io.sockets.on('connection', function(socket) {
-	socket.on('joinRoom', function(data) {
-		socket.broadcast.emit('onJoinRoom', data);
+	var room = 'arf';
+	socket.on('hello', function(data) {
+		room = data.room;
+		console.log(room);
+		socket.join(room);
+		socket.broadcast.to(room).emit('hello', data);
 	});
-	socket.on('submitVote', function(data) {
-		socket.broadcast.emit('onVoteSubmitted', data);
+	socket.on('vote', function(data) {
+		if (room) {
+			socket.broadcast.to(room).emit('vote', data);
+		}else{
+			console.log("no room");
+		}
 	});
 });
-
 
 // Start server
 server.listen(config.port, function () {

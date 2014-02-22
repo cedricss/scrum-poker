@@ -67,6 +67,25 @@ body {
     margin-top: 28px;
 }
 
+.table {
+    height: 300px;
+}
+
+.deck {
+    clear: both;
+}
+
+.card {
+    display: block;
+    float:left;
+    cursor: pointer;
+    margin: 5px;
+    width:100px;
+    height:100px;
+    pading-top: 30px;
+    font-size: 35px;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
