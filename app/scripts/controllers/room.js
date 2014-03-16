@@ -11,6 +11,8 @@ angular.module('scrumPokerApp')
     $scope.votes = [];
     $scope.cards = [1, 2, 5, 8, 20, 40, 'C', '?'];
 
+    var guess_name = "guest"+Math.floor(Math.random()*10000);
+
     socket.on('vote', function(data) {
         $scope.votes.push(data);
     });
@@ -21,12 +23,13 @@ angular.module('scrumPokerApp')
 
     $scope.vote = function(value) {
         var vote = {
+            user_name: $scope.user_name ? $scope.user_name : guess_name,
             id: new Date().getTime(),
             value: value
 
         };
 
-        console.log(value);
+        console.log(vote);
 
         $scope.votes.push(vote);
         socket.emit('vote', vote);

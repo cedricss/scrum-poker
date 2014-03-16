@@ -1,8 +1,12 @@
-<div class="">
-  <h3>{{room_name}}</h3>
+<div class="text-center">
+  <h3>Room "{{room_name}}"</h3>
+  <input ng-model="user_name" class="form-control" type="text" placeholder="Type your name"/>
+</div>
+<div>
   <div class="table">
     <span class="card label label-default" ng-repeat="vote in votes">
-    {{vote.value}}
+    <span class="vote">{{vote.value}}</span>
+    <h3 class="user">{{vote.user_name}}</h3>
     </span>
   </div>
   <div class="deck">
