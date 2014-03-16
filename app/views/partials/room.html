@@ -1,11 +1,11 @@
 <div class="">
-	<h3>{{room_name}}</h3>
-	<div class="table">
-	<span class="card label label-default" ng-repeat="vote in votes">
-		{{vote.value}}
-	</span>
-	</div>
-	<div class="deck">
-		<card value="value" on-click="vote(value)" ng-repeat="value in cards"></card>
-	</div>
+  <h3>{{room_name}}</h3>
+  <div class="table">
+    <span class="card label label-default" ng-repeat="vote in votes">
+    {{vote.value}}
+    </span>
+  </div>
+  <div class="deck">
+    <card value="value" on-click="vote(value)" ng-repeat="value in cards"></card>
+  </div>
 </div>
