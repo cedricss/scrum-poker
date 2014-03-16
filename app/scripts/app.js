@@ -12,7 +12,7 @@ angular.module('scrumPokerApp', [
         templateUrl: 'partials/main',
         controller: 'MainCtrl'
       })
-      .when('/r/:room_id', {
+      .when('/room-:room_id', {
         templateUrl: 'partials/room',
         controller: 'RoomCtrl'
       })
