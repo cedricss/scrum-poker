@@ -1,2 +1,3 @@
-scrum-dashboard
+scrum-poker
 ===============
+Work In Progress...
