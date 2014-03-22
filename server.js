@@ -37,6 +37,14 @@ io.sockets.on('connection', function(socket) {
 			console.log("no room");
 		}
 	});
+	socket.on('start', function(data) {
+		console.log(data.summary);
+		if (room) {
+			socket.broadcast.to(room).emit('start', data);
+		}else{
+			console.log("no room");
+		}
+	});
 });
 
 // Start server
