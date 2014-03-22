@@ -23,38 +23,38 @@ require('./lib/config/express')(app);
 require('./lib/routes')(app);
 
 io.sockets.on('connection', function(socket) {
-	var room = 'arf';
+  var room = 'arf';
 
-	socket.on('hello', function(player) {
-		var players = [];
-		room = player.room;
-		socket.join(room);
-		socket.username = player.username;
-		socket.playerid = player.id;
-		console.log(io.sockets.clients(room));
-		io.sockets.clients(room).forEach(function(client) {
-    	players.push({id:client.playerid, username:client.username, vote:client.vote});
-		});
-		io.sockets.in(room).emit("hello", players);
-	});
+  socket.on('hello', function(player) {
+    var players = [];
+    room = player.room;
+    socket.join(room);
+    socket.username = player.username;
+    socket.playerid = player.id;
+    console.log(io.sockets.clients(room));
+    io.sockets.clients(room).forEach(function(client) {
+      players.push({id:client.playerid, username:client.username, vote:client.vote});
+    });
+    io.sockets.in(room).emit("hello", players);
+  });
 
-	socket.on('vote', function(vote) {
-		if (room) {
-			socket.vote = vote.value;
-			socket.broadcast.to(room).emit('vote', vote);
-		}else{
-			console.log("no room");
-		}
-	});
+  socket.on('vote', function(vote) {
+    if (room) {
+      socket.vote = vote.value;
+      socket.broadcast.to(room).emit('vote', vote);
+    }else{
+      console.log("no room");
+    }
+  });
 
-	socket.on('start', function(data) {
-		console.log(data.summary);
-		if (room) {
-			socket.broadcast.to(room).emit('start', data);
-		}else{
-			console.log("no room");
-		}
-	});
+  socket.on('start', function(data) {
+    console.log(data.summary);
+    if (room) {
+      socket.broadcast.to(room).emit('start', data);
+    }else{
+      console.log("no room");
+    }
+  });
 });
 
 // Start server
