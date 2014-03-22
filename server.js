@@ -25,20 +25,23 @@ require('./lib/routes')(app);
 io.sockets.on('connection', function(socket) {
 	var room = 'arf';
 
-	socket.on('hello', function(data) {
+	socket.on('hello', function(player) {
 		var players = [];
-		room = data.room;
+		room = player.room;
 		socket.join(room);
-		socket.username = data.username;
+		socket.username = player.username;
+		socket.playerid = player.id;
+		console.log(io.sockets.clients(room));
 		io.sockets.clients(room).forEach(function(client) {
-    	players.push({id:client.id, username:client.username});
+    	players.push({id:client.playerid, username:client.username, vote:client.vote});
 		});
 		io.sockets.in(room).emit("hello", players);
 	});
 
-	socket.on('vote', function(data) {
+	socket.on('vote', function(vote) {
 		if (room) {
-			socket.broadcast.to(room).emit('vote', data);
+			socket.vote = vote.value;
+			socket.broadcast.to(room).emit('vote', vote);
 		}else{
 			console.log("no room");
 		}

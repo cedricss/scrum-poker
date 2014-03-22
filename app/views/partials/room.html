@@ -27,9 +27,9 @@
 <div>
   <h2>Story: {{current_story_summary}}</h2>
   <div class="table">
-    <span class="card label label-default" ng-repeat="vote in votes">
-    <span class="vote">{{vote.value}}</span>
-    <h3 class="user">{{vote.user_name}}</h3>
+    <span class="card label label-default" ng-repeat="player in players">
+    <span class="vote">{{player.vote}}</span>
+    <h3 class="user">{{player.username}}</h3>
     </span>
   </div>
   <div class="deck">

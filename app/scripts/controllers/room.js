@@ -5,22 +5,32 @@ angular.module('scrumPokerApp')
 
     $scope.room_name = $routeParams.room_id;
     $scope.playing = false;
-    $scope.votes = [];
     $scope.players = [];
     $scope.cards = [1, 2, 5, 8, 20, 40, 'C', '?'];
     $scope.guest_name = "guest"+Math.floor(Math.random()*10000);
+    $scope.id = new Date().getTime();
 
     function getUsername() {
         return $scope.user_name ? $scope.user_name : $scope.guest_name;
     }
 
-    function onVote(data) {
-        $scope.votes.push(data);
+    function addVote(players, vote) {
+        players.forEach(function(player) {
+            if(player.id == vote.playerid) {
+                player.vote = vote.value;
+            }
+        })
+    }
+
+    function onVote(vote) {
+        addVote($scope.players, vote);
     }
 
     function onStart(story) {
         $scope.playing = true;
-        $scope.votes = [];
+        $scope.players.forEach(function(player) {
+            player.vote = undefined;
+        });
         $scope.next_story_summary = undefined;
         if(typeof story.summary === "undefined") {
             story.summary = "No story defined";
@@ -29,11 +39,9 @@ angular.module('scrumPokerApp')
         console.log("blo"+$scope.current_story_summary);
     }
 
-    socket.emit('hello', {username: getUsername(), room: $scope.room_name});
+    socket.emit('hello', {id: $scope.id, username: getUsername(), room: $scope.room_name});
 
-    socket.on('vote', function(data) {
-        onVote(data);
-    });
+    socket.on('vote', function(data) { onVote(data); });
 
     socket.on('hello', function(players) {
         $scope.players = players;
@@ -50,13 +58,11 @@ angular.module('scrumPokerApp')
 
     $scope.vote = function(value) {
         var vote = {
-            user_name: getUsername(),
-            id: new Date().getTime(),
+            playerid: $scope.id,
             value: value
-
         };
         console.log(vote);
-        $scope.votes.push(vote);
+        onVote(vote);
         socket.emit('vote', vote);
     };
 
