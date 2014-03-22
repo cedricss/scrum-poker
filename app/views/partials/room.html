@@ -15,8 +15,11 @@
       </div>
     </div>
   </form>
-  <button class="btn btn-success btn-lg pull-right" type="button" ng-click="start()">
+  <button class="btn btn-success btn-lg pull-right" type="button" ng-hide="playing" ng-click="start()">
   <span class="glyphicon glyphicon-play"></span> Start voting!
+  </button>
+  <button class="btn btn-danger btn-lg pull-right" type="button" ng-show="playing" ng-click="abort()">
+  <span class="glyphicon glyphicon-stop"></span> Abort voting
   </button>
   <div class="clearfix"></div>
   <hr/>

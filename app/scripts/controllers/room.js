@@ -19,6 +19,8 @@ angular.module('scrumPokerApp')
 
     function onStart(story) {
         $scope.playing = true;
+        $scope.votes = [];
+        $scope.next_story_summary = undefined;
         if(typeof story.summary === "undefined") {
             story.summary = "No story defined";
         }
