@@ -24,12 +24,18 @@ require('./lib/routes')(app);
 
 io.sockets.on('connection', function(socket) {
 	var room = 'arf';
+
 	socket.on('hello', function(data) {
+		var players = [];
 		room = data.room;
-		console.log(room);
 		socket.join(room);
-		socket.broadcast.to(room).emit('hello', data);
+		socket.username = data.username;
+		io.sockets.clients(room).forEach(function(client) {
+    	players.push({id:client.id, username:client.username});
+		});
+		io.sockets.in(room).emit("hello", players);
 	});
+
 	socket.on('vote', function(data) {
 		if (room) {
 			socket.broadcast.to(room).emit('vote', data);
@@ -37,6 +43,7 @@ io.sockets.on('connection', function(socket) {
 			console.log("no room");
 		}
 	});
+
 	socket.on('start', function(data) {
 		console.log(data.summary);
 		if (room) {
