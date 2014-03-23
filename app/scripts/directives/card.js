@@ -11,6 +11,6 @@ angular.module('scrumPokerApp')
         vote: '&onClick'
       },
 
-      template: '<span class="card label label-primary card-position-{{value}}" ng-click="vote()">{{value}}</span>'
+      template: '<span class="card card-position-{{value}}" ng-click="vote()">{{value}}</span>'
     };
   });

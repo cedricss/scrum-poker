@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-2">
+  <div class="sidebar col-md-3">
     <h4>Room "{{room_name}}"</h4>
     <hr/>
     <form role="form">
@@ -15,13 +15,12 @@
     <button class="btn btn-success btn-lg pull-right" type="button" ng-hide="playing" ng-click="start()">
     <span class="glyphicon glyphicon-play"></span> Start voting!
     </button>
-    <button class="btn btn-danger btn-lg pull-right" type="button" ng-show="playing" ng-click="abort()">
+    <button class="btn btn-danger btn-lg pull-right" type="button" ng-show="playing" ng-click="stop()">
     <span class="glyphicon glyphicon-stop"></span> Abort voting
     </button>
     <div class="clearfix"></div>
-    <hr/>
   </div>
-  <div class="col-md-10">
+  <div class="main col-md-9">
     <h2>Story: {{current_story_summary}}</h2>
     <div class="table">
       <ul>
