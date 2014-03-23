@@ -49,6 +49,7 @@ io.sockets.on('connection', function(socket) {
     socket.join(room);
     socket.username = player.username;
     socket.playerid = player.id;
+    socket.vote = 0;
     syncPlayers();
   });
 

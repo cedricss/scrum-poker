@@ -25,7 +25,7 @@ angular.module('scrumPokerApp')
     function onStart(story) {
         $scope.playing = true;
         for (var id in $scope.players) {
-            $scope.players[id].vote = undefined;
+            $scope.players[id].vote = 0;
         }
         $scope.next_story_summary = undefined;
         if(typeof story.summary === "undefined") {
