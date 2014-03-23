@@ -25,7 +25,7 @@ angular.module('scrumPokerApp')
     function onStart(story) {
         $scope.playing = true;
         for (var id in $scope.players) {
-            players[id].vote = undefined;
+            $scope.players[id].vote = undefined;
         }
         $scope.next_story_summary = undefined;
         if(typeof story.summary === "undefined") {
@@ -39,8 +39,10 @@ angular.module('scrumPokerApp')
 
     socket.on('vote', function(data) { onVote(data); });
 
-    socket.on('hello', function(players) {
-        $scope.players = players;
+    socket.on('hello', function(game) {
+        console.log(game);
+        $scope.players = game.players;
+        $scope.playing = game.state.playing;
     });
 
     socket.on('start', function(story) {
