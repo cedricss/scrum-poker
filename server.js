@@ -25,17 +25,22 @@ require('./lib/routes')(app);
 io.sockets.on('connection', function(socket) {
   var room = 'arf';
 
+  function syncPlayers() {
+    var players = {};
+    io.sockets.clients(room).forEach(function(client) {
+      if(!client.playerdisconnected) {
+        players[client.playerid] = {id:client.playerid, username:client.username, vote:client.vote};
+      }
+    });
+    io.sockets.in(room).emit("hello", players);
+  }
+
   socket.on('hello', function(player) {
-    var players = [];
     room = player.room;
     socket.join(room);
     socket.username = player.username;
     socket.playerid = player.id;
-    console.log(io.sockets.clients(room));
-    io.sockets.clients(room).forEach(function(client) {
-      players.push({id:client.playerid, username:client.username, vote:client.vote});
-    });
-    io.sockets.in(room).emit("hello", players);
+    syncPlayers();
   });
 
   socket.on('vote', function(vote) {
@@ -48,13 +53,18 @@ io.sockets.on('connection', function(socket) {
   });
 
   socket.on('start', function(data) {
-    console.log(data.summary);
     if (room) {
       socket.broadcast.to(room).emit('start', data);
     }else{
       console.log("no room");
     }
   });
+  
+  socket.on('disconnect', function() {
+    socket.playerdisconnected = true;
+    syncPlayers();
+  });
+
 });
 
 // Start server
