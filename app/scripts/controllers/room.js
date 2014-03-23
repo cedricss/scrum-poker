@@ -35,6 +35,10 @@ angular.module('scrumPokerApp')
         console.log("blo"+$scope.current_story_summary);
     }
 
+    function onStop() {
+         $scope.playing = false;
+    }
+
     socket.emit('hello', {id: $scope.id, username: getUsername(), room: $scope.room_name});
 
     socket.on('vote', function(data) { onVote(data); });
@@ -47,6 +51,10 @@ angular.module('scrumPokerApp')
 
     socket.on('start', function(story) {
         onStart(story);
+    });
+
+    socket.on('stop', function(story) {
+        onStop();
     });
 
     $scope.vote = function(value) {
@@ -65,6 +73,11 @@ angular.module('scrumPokerApp')
         };
         onStart(story);
         socket.emit('start', story);
+    }
+
+    $scope.stop = function() {
+        onStop();
+        socket.emit('stop');
     }
 
   });
