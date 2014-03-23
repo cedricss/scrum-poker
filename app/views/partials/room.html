@@ -1,39 +1,39 @@
-<div>
-  <h4>Room "{{room_name}}"</h4>
-  <hr/>
-  <form class="form-horizontal" role="form">
-    <div class="form-group">
-      <label class="col-sm-3 control-label">My Username</label>
-      <div class="col-sm-9">
+<div class="row">
+  <div class="col-md-2">
+    <h4>Room "{{room_name}}"</h4>
+    <hr/>
+    <form role="form">
+      <div class="form-group">
+        <label>My Username</label>
         <input ng-model="user_name" class="form-control" type="text" placeholder="{{guest_name}}"/>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-3 control-label">Next story to vote for</label>
-      <div class="col-sm-9">
-        <input ng-model="next_story_summary" class="form-control" type="text" placeholder="Enter the summary of the current story (optional)"/>
+      <div class="form-group">
+        <label>Next story to vote for</label>
+        <textarea rows="4" ng-model="next_story_summary" class="form-control" placeholder="Enter the summary of the current story (optional)"></textarea>
       </div>
-    </div>
-  </form>
-  <button class="btn btn-success btn-lg pull-right" type="button" ng-hide="playing" ng-click="start()">
-  <span class="glyphicon glyphicon-play"></span> Start voting!
-  </button>
-  <button class="btn btn-danger btn-lg pull-right" type="button" ng-show="playing" ng-click="abort()">
-  <span class="glyphicon glyphicon-stop"></span> Abort voting
-  </button>
-  <div class="clearfix"></div>
-  <hr/>
-</div>
-<div>
-  <h2>Story: {{current_story_summary}}</h2>
-  <div class="table">
-    <span class="card label label-default" ng-repeat="player in players">
-    <span class="vote">{{player.vote}}</span>
-    <h3 class="user">{{player.username}}</h3>
-    </span>
-  </div>
-  <div class="deck">
+    </form>
+    <button class="btn btn-success btn-lg pull-right" type="button" ng-hide="playing" ng-click="start()">
+    <span class="glyphicon glyphicon-play"></span> Start voting!
+    </button>
+    <button class="btn btn-danger btn-lg pull-right" type="button" ng-show="playing" ng-click="abort()">
+    <span class="glyphicon glyphicon-stop"></span> Abort voting
+    </button>
+    <div class="clearfix"></div>
     <hr/>
-    <card value="value" on-click="vote(value)" ng-repeat="value in cards"></card>
+  </div>
+  <div class="col-md-10">
+    <h2>Story: {{current_story_summary}}</h2>
+    <div class="table">
+      <ul>
+        <li ng-repeat="player in players">
+          <card value="player.vote"></card>
+          <h3 class="user">{{player.username}}</h3>
+        </li>
+      </ul>
+    </div>
+    <div class="deck">
+      <hr/>
+      <card value="value" on-click="vote(value)" ng-repeat="value in cards"></card>
+    </div>
   </div>
 </div>
