@@ -22,11 +22,16 @@ angular.module('scrumPokerApp')
         addVote($scope.players, vote);
     }
 
-    function onStart(story) {
-        $scope.playing = true;
+    function resetVote() {
         for (var id in $scope.players) {
             $scope.players[id].vote = 0;
         }
+        $scope.current_story_summary = undefined;
+    }
+
+    function onStart(story) {
+        $scope.playing = true;
+        resetVote();
         $scope.next_story_summary = undefined;
         if(typeof story.summary === "undefined") {
             story.summary = "No story defined";
@@ -37,6 +42,7 @@ angular.module('scrumPokerApp')
 
     function onStop() {
          $scope.playing = false;
+         resetVote();
     }
 
     socket.emit('hello', {id: $scope.id, username: getUsername(), room: $scope.room_name});
