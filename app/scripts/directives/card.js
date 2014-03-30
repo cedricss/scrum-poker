@@ -8,9 +8,10 @@ angular.module('scrumPokerApp')
       restrict: 'E',
       scope: {
         value: '=',
+        nextvalue: "=",
         vote: '&onClick'
       },
 
-      template: '<span class="card card-position-{{value}}" ng-click="vote()">{{value}}</span>'
+      template: '<span ng-class="{waiting: nextvalue==-1}" class="card card-position-{{value}}" ng-click="vote()">{{value}}</span>'
     };
   });

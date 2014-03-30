@@ -24,9 +24,9 @@
     <h2 ng-show="current_story_summary">Story: {{current_story_summary}}</h2>
     <h2 ng-hide="current_story_summary">Vote not started. But plays if you want.</h2>
     <div class="table">
-      <ul>
+      <ul ng-class="{reveal: playing==true}">
         <li ng-repeat="player in players">
-          <card value="player.vote"></card>
+          <card nextvalue="player.next_vote" value="player.vote"></card>
           <h3 class="user">{{player.username}}</h3>
         </li>
       </ul>

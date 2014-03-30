@@ -15,6 +15,21 @@ $icon-font-path: "/bower_components/bootstrap-sass/fonts/";
           border-radius: $radius;
 }
 
+@mixin perspective($val) {
+  -webkit-perspective: $val; 
+  -moz-perspective: $val; 
+  -ms-perspective: $val; 
+  perspective: $val;
+}
+
+@mixin rotateX( $val: -2deg ) {
+  -webkit-transform: rotateX($val);
+  -moz-transform: rotateX($val);
+  -ms-transform: rotateX($val);
+  -o-transform: rotateX($val);
+  transform: rotateX($val);
+}
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -96,11 +111,13 @@ body {
     clear: both;
 }
 
-$transition-speed: 300ms;
+$transition-speed: 600ms;
 $cards: (1, 2, 5, 8, 20, 40);
 
 .card {
     display: block;
+    @include rotateX(50deg);
+    margin-bottom:10px;
     float:left;
     cursor: pointer;
     margin: 5px;
@@ -118,6 +135,16 @@ $cards: (1, 2, 5, 8, 20, 40);
     transition-property: transform;
 }
 
+.reveal card {
+    @include rotateX(0deg);
+}
+
+.waiting {
+    background-color: #D6D6D6;
+    @include rotateX(50deg);
+        margin-bottom:0px;
+}
+
 .deck .card {
     width:8%;
 }
@@ -130,6 +157,7 @@ $cards: (1, 2, 5, 8, 20, 40);
 .table {
     position: relative;
     ul {
+        @include perspective(500px);
         position: absolute;
         bottom: 0;
         padding: 0;
