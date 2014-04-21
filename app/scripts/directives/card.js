@@ -8,10 +8,12 @@ angular.module('scrumPokerApp')
       restrict: 'E',
       scope: {
         value: '=',
-        nextvalue: "=",
+        playing: "=",
+        type: '=',
         vote: '&onClick'
       },
 
-      template: '<span ng-class="{waiting: nextvalue==-1}" class="card card-position-{{value}}" ng-click="vote()">{{value}}</span>'
-    };
+      templateUrl: 'partials/card.html'
+
+          };
   });

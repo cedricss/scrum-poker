@@ -1,0 +1,11 @@
+<div>
+    <span ng-show="playing == false" ng-class="{waiting: playing==true}" class="card card-position-{{value}}">    
+      {{value}}  
+    </span>
+    <span ng-show="type == 'deck'" class="card" ng-click="vote()">    
+      {{value}}  
+    </span>
+  <div ng-show="value != -1 && type != 'deck'">
+    Played! {{type}}
+  </div>
+</div>
