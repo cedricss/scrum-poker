@@ -51,11 +51,7 @@ angular.module('scrumPokerApp')
         $scope.playing = true;
         resetVote();
         $scope.next_story_summary = undefined;
-        if(typeof story.summary === "undefined") {
-            story.summary = "No story defined";
-        }
         $scope.current_story_summary = story.summary;
-        console.log("blo"+$scope.current_story_summary);
     }
 
     function onStop() {
