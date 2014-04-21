@@ -16,21 +16,14 @@ angular.module('scrumPokerApp')
 
     function addVote(players, vote) {
         console.log(players);
-        players[vote.playerid].next_vote = vote.value;
-        if (vote.playerid == $scope.id) {
-            //players[vote.playerid].vote = vote.value;
-        }
+        players[vote.playerid].vote = vote.value;
         var end = true;
         for (var playerid in players) {
-            console.log(players[playerid].next_vote);
-            if (players[playerid].next_vote == -1) {
+            if (players[playerid].vote == -1) {
                 end = false;
             }
         }
         if (end) {
-            for (var playerid in players) {
-                 players[playerid].vote =  players[playerid].next_vote;
-            }
             $scope.playing = false;
         }
     }
@@ -42,7 +35,6 @@ angular.module('scrumPokerApp')
     function resetVote() {
         for (var id in $scope.players) {
             $scope.players[id].vote = -1;
-            $scope.players[id].next_vote = -1;
         }
         $scope.current_story_summary = undefined;
     }
